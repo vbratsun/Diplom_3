@@ -23,7 +23,7 @@ public class LoginTests extends TestBase {
     public static Collection<Object[]> testData() {
         return Arrays.asList(new Object[][]{
                 {"chrome"},
-                //{"yandex"},
+                {"yandex"}
         });
     }
 

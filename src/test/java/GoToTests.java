@@ -21,7 +21,7 @@ public class GoToTests extends TestBase {
     public static Collection<Object[]> testData() {
         return Arrays.asList(new Object[][]{
                 {"chrome"},
-                //{"yandex"}, // пока не заработал яндекс браузер
+                {"yandex"}
         });
     }
 
