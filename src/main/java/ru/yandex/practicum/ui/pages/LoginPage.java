@@ -4,17 +4,11 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.practicum.constants.Urls;
-
-import java.time.Duration;
 
 import static org.junit.Assert.assertEquals;
 
-public class LoginPage {
-
-    private final WebDriver webDriver;
+public class LoginPage extends PageBase {
 
     private final By emailInput = By.xpath(".//label[text()='Email']/following-sibling::input");
     private final By passwordInput = By.xpath(".//label[text()='Пароль']/following-sibling::input");
@@ -41,16 +35,12 @@ public class LoginPage {
         webDriver.findElement(enterButton).click();
         return this;
     }
+
     @Step("Проверить что мы на странице авторизации после выхода из ЛК")
     public String verifyExitLkURL() {
         WebElement element = waitForElementToBeClickable(enterButton);
         String actualUrl = webDriver.getCurrentUrl();
         assertEquals("Ссылка ведёт не на форму авторизации", Urls.LOGIN_PAGE_URL, actualUrl);
         return actualUrl;
-    }
-
-    private WebElement waitForElementToBeClickable(By locator) {
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
-        return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 }

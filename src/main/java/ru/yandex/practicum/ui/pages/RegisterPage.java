@@ -1,17 +1,11 @@
 package ru.yandex.practicum.ui.pages;
 
 import io.qameta.allure.Step;
-import io.restassured.response.Response;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ru.yandex.practicum.api.clients.AuthClient;
-import ru.yandex.practicum.api.models.auth.UserLoginRequest;
-import ru.yandex.practicum.api.models.auth.UserRegisterRequest;
 import ru.yandex.practicum.constants.Urls;
 
-public class RegisterPage {
-
-    private final WebDriver webDriver;
+public class RegisterPage extends PageBase {
 
     private final By nameTextEdit = By.xpath(".//label[text()='Имя']/following-sibling::input");
     private final By emailTextEdit = By.xpath(".//label[text()='Email']/following-sibling::input");
@@ -59,23 +53,14 @@ public class RegisterPage {
         return this;
     }
 
-    @Step("Нажать на кнопку зарегестрироватся")
+    @Step("Нажать на кнопку зарегистрироваться")
     public RegisterPage registerButtonClick() {
         webDriver.findElement(registerButton).click();
         return this;
     }
 
-    @Step("Получить текст сообщения о некоректности пароля")
+    @Step("Получить текст сообщения о некорректности пароля")
     public String errorIncorrectPassword() {
-        String incorrectPassword = webDriver.findElement(errorIncorrectPassword).getText();
-        return incorrectPassword;
-    }
-
-    @Step("Логин через API созданным пользователем")
-    public String loginViaApi(UserRegisterRequest user) {
-        AuthClient authClient = new AuthClient(Urls.BASE_URI);
-        Response response = authClient.loginUser(new UserLoginRequest(user.getEmail(), user.getPassword()));
-        response.then().statusCode(200);
-        return authClient.getAccessToken(response);
+        return webDriver.findElement(errorIncorrectPassword).getText();
     }
 }

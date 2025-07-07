@@ -15,7 +15,6 @@ import java.util.Collection;
 public class RegisterTests extends TestBase {
     private final UserRegisterRequest user = new DataHelper().createRandomUser();
     private final String browserType;
-    private final String password = "12345";
 
 
     public RegisterTests(String browserType) {
@@ -44,7 +43,6 @@ public class RegisterTests extends TestBase {
         registerPage.inputEmail(user.getEmail());
         registerPage.inputPassword(user.getPassword());
         registerPage.registerButtonClick();
-        //registerPage.loginViaApi(user);
     }
 
     @Test
@@ -54,6 +52,7 @@ public class RegisterTests extends TestBase {
         registerPage.openRegisterUrl();
         registerPage.inputName(user.getName());
         registerPage.inputEmail(user.getEmail());
+        String password = "12345";
         registerPage.inputPassword(password);
         registerPage.clickEmail();
         Assert.assertEquals(

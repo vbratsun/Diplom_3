@@ -87,8 +87,8 @@ public class LoginTests extends TestBase {
     }
 
     @Test
-    @DisplayName("вход через кнопку войти на форме «Востановления пароля»")
-    @Description("вход через кнопку войти на форме «Востановления пароля»")
+    @DisplayName("вход через кнопку войти на форме «Восстановления пароля»")
+    @Description("вход через кнопку войти на форме «Восстановления пароля»")
     public void testEnterRecoveryAccount() throws InterruptedException {
         mainPage.createUserViaApi();
         recoveryPage.openForgotUrl();

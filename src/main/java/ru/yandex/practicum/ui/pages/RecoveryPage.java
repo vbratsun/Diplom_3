@@ -5,9 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.practicum.constants.Urls;
 
-public class RecoveryPage {
-    private final WebDriver webDriver;
-
+public class RecoveryPage extends PageBase {
     private final By linkEnter = By.xpath(".//a[text()='Войти']");
 
     public RecoveryPage(WebDriver webDriver) {

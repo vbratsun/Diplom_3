@@ -1,3 +1,4 @@
+import org.apache.http.HttpStatus;
 import org.junit.After;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.practicum.api.clients.AuthClient;
@@ -38,7 +39,7 @@ public class TestBase {
             AuthClient authClient = new AuthClient(Urls.BASE_URI);
             authClient.deleteUser(mainPage.getCurrentUserToken())
                     .then()
-                    .statusCode(202);
+                    .statusCode(HttpStatus.SC_ACCEPTED);
         }
     }
 }

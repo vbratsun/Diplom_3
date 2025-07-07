@@ -35,7 +35,7 @@ public class GoToTests extends TestBase {
     @Description("Проверка перехода по клику на «Личный кабинет»")
     public void testLKverify() throws InterruptedException {
         mainPage.createUserViaApi();
-        lkPage.openAutorizeLkUrl();
+        lkPage.openAuthorizeLkUrl();
         loginPage.inputEmail(mainPage.getCreatedUserEmail());
         loginPage.inputPassword(mainPage.getCreatedUserPassword());
         loginPage.enterButtonClick();
@@ -48,7 +48,7 @@ public class GoToTests extends TestBase {
     @Description("Проверить, что при клике на «Конструктор» из ЛК происходит переход на главную страницу")
     public void testConstructorButtonRedirectsToMainPage() {
         mainPage.createUserViaApi();
-        lkPage.openAutorizeLkUrl();
+        lkPage.openAuthorizeLkUrl();
         loginPage.inputEmail(mainPage.getCreatedUserEmail());
         loginPage.inputPassword(mainPage.getCreatedUserPassword());
         loginPage.enterButtonClick();
@@ -62,7 +62,7 @@ public class GoToTests extends TestBase {
     @Description("Проверить, что при клике на логотип из ЛК происходит переход на главную страницу")
     public void testLogoClickRedirectsToMainPage() {
         mainPage.createUserViaApi();
-        lkPage.openAutorizeLkUrl();
+        lkPage.openAuthorizeLkUrl();
         loginPage.inputEmail(mainPage.getCreatedUserEmail());
         loginPage.inputPassword(mainPage.getCreatedUserPassword());
         loginPage.enterButtonClick();
@@ -76,7 +76,7 @@ public class GoToTests extends TestBase {
     @Description("Проверить что вышли из личного кабинета")
     public void testExitLK() throws InterruptedException {
         mainPage.createUserViaApi();
-        lkPage.openAutorizeLkUrl();
+        lkPage.openAuthorizeLkUrl();
         loginPage.inputEmail(mainPage.getCreatedUserEmail());
         loginPage.inputPassword(mainPage.getCreatedUserPassword());
         loginPage.enterButtonClick();

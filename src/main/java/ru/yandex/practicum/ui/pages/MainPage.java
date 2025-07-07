@@ -2,24 +2,19 @@ package ru.yandex.practicum.ui.pages;
 
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.practicum.api.clients.AuthClient;
 import ru.yandex.practicum.api.models.auth.UserLoginRequest;
 import ru.yandex.practicum.api.models.auth.UserRegisterRequest;
 import ru.yandex.practicum.api.utils.DataHelper;
 import ru.yandex.practicum.constants.Urls;
 
-import java.time.Duration;
-
 import static org.junit.Assert.assertEquals;
 
-public class MainPage {
-
-    private final WebDriver webDriver;
+public class MainPage extends PageBase {
 
     private final By enterAccount = By.xpath(".//button[text()='Войти в аккаунт']");
     private final By enterLK = By.xpath(".//p[text()='Личный Кабинет']");
@@ -37,17 +32,13 @@ public class MainPage {
         this.webDriver = webDriver;
     }
 
-    protected WebElement waitForElementToBeClickable(By locator) {
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
-        return wait.until(ExpectedConditions.elementToBeClickable(locator));
-    }
-
     @Step("Кликнуть по кнопке войти в аккаунт")
     public MainPage clickEnterInAccount() {
         WebElement element = waitForElementToBeClickable(enterAccount);
         element.click();
         return this;
     }
+
     @Step("Кликнуть по лого")
     public MainPage clickLogoBurgers() {
         WebElement element = waitForElementToBeClickable(logoBurgers);
@@ -90,9 +81,9 @@ public class MainPage {
         createdUser = new DataHelper().createRandomUser();
         AuthClient authClient = new AuthClient(Urls.BASE_URI);
         Response response = authClient.registerUser(createdUser);
-        response.then().statusCode(200);
-        Response loginResponse = authClient.loginUser(new UserLoginRequest(createdUser.getEmail(),createdUser.getPassword()));
-        loginResponse.then().statusCode(200);
+        response.then().statusCode(HttpStatus.SC_OK);
+        Response loginResponse = authClient.loginUser(new UserLoginRequest(createdUser.getEmail(), createdUser.getPassword()));
+        loginResponse.then().statusCode(HttpStatus.SC_OK);
         currentUserToken = authClient.getAccessToken(loginResponse);
         return this;
     }
